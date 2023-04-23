@@ -13,4 +13,6 @@ import java.util.UUID;
 public interface MetricRepository extends JpaRepository<Metric, UUID> {
 
     Page<Metric> findAll(@NonNull Pageable pageable);
+
+    boolean existsByName(String name);
 }

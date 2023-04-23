@@ -1,7 +1,6 @@
 package com.reckue.ms.controller;
 
 import com.reckue.ms.entity.Metric;
-import com.reckue.ms.repository.MetricRepository;
 import com.reckue.ms.service.MetricService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,7 @@ public class MetricController {
 
     @GetMapping("/{id}")
     Metric findById(@PathVariable UUID id) {
-        return  metricService.findById(id);
+        return metricService.findById(id);
     }
 
     @GetMapping("/filter")

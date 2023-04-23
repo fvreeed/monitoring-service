@@ -24,6 +24,9 @@ public class MetricServiceImpl implements MetricService {
     @Override
     public Metric create(Metric metric) {
         metric.setId(UUID.randomUUID());
+        if (metricRepository.existsByName(metric.getName())) {
+            throw new RuntimeException();
+        }
         return metricRepository.save(metric);
     }
 
@@ -42,6 +45,9 @@ public class MetricServiceImpl implements MetricService {
     @Override
     public Metric updateById(Metric metric, UUID id) {
         if (!metricRepository.existsById(id)) {
+            throw new RuntimeException();
+        }
+        if (metricRepository.existsByName(metric.getName())) {
             throw new RuntimeException();
         }
         metric.setId(id);
