@@ -1,6 +1,8 @@
 package com.reckue.ms.service.impl;
 
 import com.reckue.ms.entity.Metric;
+import com.reckue.ms.handler.exception.metric.MetricNotFoundException;
+import com.reckue.ms.handler.exception.metric.MetricAlreadyExistException;
 import com.reckue.ms.repository.MetricRepository;
 import com.reckue.ms.service.MetricService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,7 @@ public class MetricServiceImpl implements MetricService {
     public Metric create(Metric metric) {
         metric.setId(UUID.randomUUID());
         if (metricRepository.existsByName(metric.getName())) {
-            throw new RuntimeException();
+            throw new MetricAlreadyExistException(metric.getName());
         }
         return metricRepository.save(metric);
     }
@@ -33,7 +35,7 @@ public class MetricServiceImpl implements MetricService {
     @Override
     public Metric findById(UUID id) {
         return metricRepository.findById(id)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(() -> new MetricNotFoundException(id));
     }
 
     @Override
@@ -45,10 +47,10 @@ public class MetricServiceImpl implements MetricService {
     @Override
     public Metric updateById(Metric metric) {
         if (!metricRepository.existsById(metric.getId())) {
-            throw new RuntimeException();
+            throw new MetricNotFoundException(metric.getId());
         }
         if (metricRepository.existsByName(metric.getName())) {
-            throw new RuntimeException();
+            throw new MetricAlreadyExistException(metric.getName());
         }
         metric.setId(metric.getId());
         return metricRepository.save(metric);
@@ -57,7 +59,7 @@ public class MetricServiceImpl implements MetricService {
     @Override
     public void deleteById(UUID id) {
         if (!metricRepository.existsById(id)) {
-            throw new RuntimeException();
+            throw new MetricNotFoundException(id);
         }
         metricRepository.deleteById(id);
     }
