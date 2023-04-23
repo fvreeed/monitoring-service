@@ -32,7 +32,8 @@ public class MetricController {
 
     @PostMapping("/{id}")
     Metric updateById(@RequestBody Metric metric, @PathVariable UUID id) {
-        return metricService.updateById(metric, id);
+        metric.setId(id);
+        return metricService.updateById(metric);
     }
 
     @DeleteMapping("/{id}")

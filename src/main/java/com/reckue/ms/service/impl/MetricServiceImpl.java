@@ -43,14 +43,14 @@ public class MetricServiceImpl implements MetricService {
     }
 
     @Override
-    public Metric updateById(Metric metric, UUID id) {
-        if (!metricRepository.existsById(id)) {
+    public Metric updateById(Metric metric) {
+        if (!metricRepository.existsById(metric.getId())) {
             throw new RuntimeException();
         }
         if (metricRepository.existsByName(metric.getName())) {
             throw new RuntimeException();
         }
-        metric.setId(id);
+        metric.setId(metric.getId());
         return metricRepository.save(metric);
     }
 

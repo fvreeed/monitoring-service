@@ -13,7 +13,7 @@ public interface MetricService {
 
     List<Metric> filteredSearch(int limit, int offset);
 
-    Metric updateById(Metric metric, UUID id);
+    Metric updateById(Metric metric);
 
     void deleteById(UUID id);
 }
