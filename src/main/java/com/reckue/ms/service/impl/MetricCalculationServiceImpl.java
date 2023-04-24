@@ -8,7 +8,6 @@ import java.util.List;
 @Service
 public class MetricCalculationServiceImpl implements MetricCalculationService {
 
-
     @Override
     public double sce(double totalOfPrimaryServicesOfServer, double totalOfAllServicesOfServer) {
         if (totalOfAllServicesOfServer <= 0) {

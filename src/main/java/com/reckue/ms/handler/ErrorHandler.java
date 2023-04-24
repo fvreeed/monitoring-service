@@ -1,5 +1,6 @@
 package com.reckue.ms.handler;
 
+import com.reckue.ms.handler.exception.AlreadyExistException;
 import com.reckue.ms.handler.exception.MonitoringException;
 import com.reckue.ms.handler.exception.NotFoundException;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +22,16 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
                 .extra(ex.getExtra())
                 .build();
         return handleExceptionInternal(ex, errorResponse, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
+    @ExceptionHandler(value = {AlreadyExistException.class})
+    protected ResponseEntity<Object> handleAlreadyExist(AlreadyExistException ex, WebRequest request) {
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .code(ex.getCode())
+                .message(ex.getMessage())
+                .extra(ex.getExtra())
+                .build();
+        return handleExceptionInternal(ex, errorResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler(value = {RuntimeException.class})

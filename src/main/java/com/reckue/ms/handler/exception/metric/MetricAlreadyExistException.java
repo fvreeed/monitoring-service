@@ -8,7 +8,7 @@ public class MetricAlreadyExistException extends AlreadyExistException {
 
     public MetricAlreadyExistException(String name) {
         super(
-                "METRIC-0002",
+                "MET-0002",
                 String.format("Name \"%s\" already used", name),
                 Map.of("name", name)
         );

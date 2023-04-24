@@ -9,7 +9,7 @@ public class MetricNotFoundException extends NotFoundException {
 
     public MetricNotFoundException(UUID id) {
         super(
-                "METRIC-0001",
+                "MET-0001",
                 String.format("Metric \"%s\" not found", id),
                 Map.of("id", id)
         );
