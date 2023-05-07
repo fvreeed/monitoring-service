@@ -5,14 +5,13 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Data;
-import org.springframework.jmx.support.MetricType;
 
 import java.util.UUID;
 
 @Data
 @Entity
 @Embeddable
-public class Metric {
+public class Equipment {
 
     @Id
     private UUID id;
@@ -22,20 +21,6 @@ public class Metric {
     private String description;
 
     private String algorithm;
-
-    private boolean isUsedUsage;
-
-    private boolean isUsedCpuUsage;
-
-    private boolean isUsedRamUsage;
-
-    private boolean isUsedRomUsage;
-
-    private boolean isUsedNetworkUsage;
-
-    private boolean isUsedTemperatureValue;
-
-    private MetricType type;
 
     @Embedded
     private Audit audit;

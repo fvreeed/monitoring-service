@@ -9,7 +9,11 @@ import java.time.LocalDateTime;
 @Embeddable
 public class Audit {
 
-    private LocalDateTime createdDate;
+    private LocalDateTime createdAt;
 
     private String createdBy;
+
+    private LocalDateTime modifiedAt;
+
+    private String modifiedBy;
 }

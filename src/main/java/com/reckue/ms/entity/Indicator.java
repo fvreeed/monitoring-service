@@ -20,5 +20,8 @@ public class Indicator {
     private IndicatorType type;
 
     @Embedded
-    private Audit audit;
+    private IndicatorAudit indicatorAudit;
+
+    @Embedded
+    private Equipment equipment;
 }
