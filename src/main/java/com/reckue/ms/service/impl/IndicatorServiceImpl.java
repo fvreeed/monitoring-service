@@ -52,6 +52,6 @@ public class IndicatorServiceImpl implements IndicatorService {
     @Override
     public List<Indicator> findAllByDate(long limit, long offset, LocalDateTime start, LocalDateTime end) {
         Pageable pageable = new PageRequest((int) offset, (int) limit, Sort.unsorted());
-        return indicatorRepository.findByAudit_CreatedDateBetween(pageable, start, end).getContent();
+        return indicatorRepository.findByAudit_CreatedAtBetween(pageable, start, end).getContent();
     }
 }
