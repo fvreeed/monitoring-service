@@ -3,32 +3,37 @@ package com.reckue.ms.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "indicators")
-public class Indicator {
+@Table(name = "metric_results")
+public class MetricResult {
 
     @Id
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "value")
+    @Column(name = "metric_value")
     private double value;
 
-    @Column(name = "type")
-    private IndicatorType type;
+    @OneToMany(mappedBy = "metricResult")
+    private List<CalculationError> errors = new ArrayList<>();
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "collectedAt", column = @Column(name = "collected_at")),
             @AttributeOverride(name = "createdAt", column = @Column(name = "created_at")),
             @AttributeOverride(name = "createdBy", column = @Column(name = "created_by")),
             @AttributeOverride(name = "modifiedAt", column = @Column(name = "modified_at")),
             @AttributeOverride(name = "modifiedBy", column = @Column(name = "modified_by")),
     })
-    private IndicatorAudit audit;
+    private Audit audit;
+
+    @ManyToOne
+    @JoinColumn(name = "metric_id", nullable = false)
+    private Metric metric;
 
     @ManyToOne
     @JoinColumn(name = "equipment_id", nullable = false)

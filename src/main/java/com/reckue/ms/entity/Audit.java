@@ -1,5 +1,6 @@
 package com.reckue.ms.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.Data;
 
@@ -9,7 +10,15 @@ import java.time.LocalDateTime;
 @Embeddable
 public class Audit {
 
-    private LocalDateTime createdDate;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
+    @Column(name = "created_by")
     private String createdBy;
+
+    @Column(name = "modified_at")
+    private LocalDateTime modifiedAt;
+
+    @Column(name = "modified_by")
+    private String modifiedBy;
 }
