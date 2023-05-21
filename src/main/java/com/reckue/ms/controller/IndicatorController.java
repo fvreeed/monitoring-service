@@ -1,5 +1,6 @@
 package com.reckue.ms.controller;
 
+import com.reckue.ms.converter.IndicatorConverter;
 import com.reckue.ms.entity.Indicator;
 import com.reckue.ms.service.IndicatorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class IndicatorController {
 
     @Autowired
     private IndicatorService indicatorService;
+
+//    @Autowired
+//    private IndicatorConverter indicatorConverter;
 
     @PostMapping
     Indicator add(@RequestBody Indicator indicator) {
