@@ -24,7 +24,7 @@ public class IndicatorServiceImpl implements IndicatorService {
     }
 
     @Override
-    public Indicator add(Indicator indicator) {
+    public Indicator create(Indicator indicator) {
         indicator.setId(UUID.randomUUID());
         return indicatorRepository.save(indicator);
     }
@@ -36,7 +36,7 @@ public class IndicatorServiceImpl implements IndicatorService {
     }
 
     @Override
-    public List<Indicator> find(long limit, long offset) {
+    public List<Indicator> findByParameters(long limit, long offset) {
         Pageable pageable = new PageRequest((int) offset, (int) limit, Sort.unsorted());
         return indicatorRepository.findAll(pageable).getContent();
     }

@@ -8,11 +8,11 @@ import java.util.UUID;
 
 public interface IndicatorService {
 
-    Indicator add(Indicator indicator);
+    Indicator create(Indicator indicator);
 
     Indicator findById(UUID id);
 
-    List<Indicator> find(long limit, long offset);
+    List<Indicator> findByParameters(long limit, long offset);
 
     void deleteById(UUID id);
 
