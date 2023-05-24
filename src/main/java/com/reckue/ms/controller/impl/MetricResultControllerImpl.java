@@ -33,7 +33,7 @@ public class MetricResultControllerImpl implements MetricResultController {
 
     @Override
     public List<MetricResult> searchCalculatedMetricByFilter(int limit, int offset) {
-        return metricResultService.searchByFilter(limit, offset);
+        return metricResultService.findByFilter(limit, offset);
     }
 
     @Override

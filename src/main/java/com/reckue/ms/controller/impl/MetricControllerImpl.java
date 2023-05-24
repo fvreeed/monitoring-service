@@ -34,7 +34,7 @@ public class MetricControllerImpl implements MetricController {
 
     @Override
     public List<Metric> searchMetricByFilter(int limit, int offset) {
-        return metricService.filteredSearch(limit, offset);
+        return metricService.findByParameters(limit, offset);
     }
 
     @Override

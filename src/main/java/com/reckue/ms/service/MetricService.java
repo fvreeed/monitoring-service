@@ -11,7 +11,7 @@ public interface MetricService {
 
     Metric findById(UUID id);
 
-    List<Metric> filteredSearch(int limit, int offset);
+    List<Metric> findByParameters(int limit, int offset);
 
     Metric updateById(Metric metric);
 

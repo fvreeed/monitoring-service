@@ -39,7 +39,7 @@ public class MetricServiceImpl implements MetricService {
     }
 
     @Override
-    public List<Metric> filteredSearch(int limit, int offset) {
+    public List<Metric> findByParameters(int limit, int offset) {
         Pageable pageable = new PageRequest(offset, limit, Sort.unsorted());
         return metricRepository.findAll(pageable).getContent();
     }
