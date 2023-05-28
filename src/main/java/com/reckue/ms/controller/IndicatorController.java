@@ -2,6 +2,7 @@ package com.reckue.ms.controller;
 
 import com.reckue.ms.entity.Indicator;
 import com.reckue.ms.model.IndicatorDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -13,10 +14,10 @@ import java.util.UUID;
 public interface IndicatorController {
 
     @PostMapping
-    IndicatorDto createIndicator(@RequestBody IndicatorDto indicatorDto);
+    ResponseEntity<IndicatorDto> createIndicator(@RequestBody IndicatorDto indicatorDto);
 
     @GetMapping("/{id}")
-    Indicator findIndicatorById(@PathVariable UUID id);
+    IndicatorDto findIndicatorById(@PathVariable UUID id);
 
     @GetMapping
     List<Indicator> findIndicatorByFilter(@RequestParam long limit, @RequestParam long offset);
@@ -30,6 +31,6 @@ public interface IndicatorController {
     );
 
     @DeleteMapping("/{id}")
-    void deleteIndicatorById(@PathVariable UUID id);
+    ResponseEntity<Void> deleteIndicatorById(@PathVariable UUID id);
 }
 

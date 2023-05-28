@@ -1,7 +1,7 @@
 package com.reckue.ms.controller;
 
-import com.reckue.ms.entity.Equipment;
 import com.reckue.ms.model.EquipmentDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -11,14 +11,14 @@ import java.util.UUID;
 public interface EquipmentController {
 
     @PostMapping
-    EquipmentDto createEquipment(@RequestBody EquipmentDto equipmentDto);
+    ResponseEntity<EquipmentDto> createEquipment(@RequestBody EquipmentDto equipmentDto);
 
     @GetMapping("/{id}")
-    Equipment findEquipmentById(@PathVariable UUID id);
+    EquipmentDto findEquipmentById(@PathVariable UUID id);
 
     @PostMapping("/{id}")
-    Equipment updateEquipmentById(@RequestBody Equipment equipment, @PathVariable UUID id);
+    EquipmentDto updateEquipmentById(@RequestBody EquipmentDto equipmentDto, @PathVariable UUID id);
 
     @DeleteMapping("/{id}")
-    void deleteEquipmentById(@PathVariable UUID id);
+    ResponseEntity<Void> deleteEquipmentById(@PathVariable UUID id);
 }

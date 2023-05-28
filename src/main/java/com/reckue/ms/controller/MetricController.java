@@ -2,6 +2,7 @@ package com.reckue.ms.controller;
 
 import com.reckue.ms.entity.Metric;
 import com.reckue.ms.model.MetricDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,18 +13,18 @@ import java.util.UUID;
 public interface MetricController {
 
     @PostMapping
-    MetricDto createMetric(@RequestBody MetricDto metricDto);
+    ResponseEntity<MetricDto> createMetric(@RequestBody MetricDto metricDto);
 
     @GetMapping("/{id}")
-    Metric findMetricById(@PathVariable UUID id);
+    MetricDto findMetricById(@PathVariable UUID id);
 
     @GetMapping("/filter")
     List<Metric> searchMetricByFilter(@RequestParam int limit, @RequestParam int offset);
 
     @PostMapping("/{id}")
-    Metric updateMetricById(@RequestBody Metric metric, @PathVariable UUID id);
+    MetricDto updateMetricById(@RequestBody MetricDto metricDto, @PathVariable UUID id);
 
     @DeleteMapping("/{id}")
-    void deleteMetricById(@PathVariable UUID id);
+    ResponseEntity<Void> deleteMetricById(@PathVariable UUID id);
 }
 

@@ -6,6 +6,8 @@ import com.reckue.ms.entity.Indicator;
 import com.reckue.ms.model.IndicatorDto;
 import com.reckue.ms.service.IndicatorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,16 +22,16 @@ public class IndicatorControllerImpl implements IndicatorController {
     private IndicatorConverter indicatorConverter;
 
     @Override
-    public IndicatorDto createIndicator(IndicatorDto indicatorDto) {
+    public ResponseEntity<IndicatorDto> createIndicator(IndicatorDto indicatorDto) {
         Indicator indicator = indicatorService.create(
                 indicatorConverter.dtoToEntity(indicatorDto)
         );
-        return indicatorConverter.entityToDto(indicator);
+        return new ResponseEntity<>(indicatorConverter.entityToDto(indicator), HttpStatus.CREATED);
     }
 
     @Override
-    public Indicator findIndicatorById(UUID id) {
-        return indicatorService.findById(id);
+    public IndicatorDto findIndicatorById(UUID id) {
+        return indicatorConverter.entityToDto(indicatorService.findById(id));
     }
 
     @Override
@@ -43,7 +45,8 @@ public class IndicatorControllerImpl implements IndicatorController {
     }
 
     @Override
-    public void deleteIndicatorById(UUID id) {
+    public ResponseEntity<Void> deleteIndicatorById(UUID id) {
         indicatorService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
