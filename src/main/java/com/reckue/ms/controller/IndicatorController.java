@@ -1,8 +1,8 @@
 package com.reckue.ms.controller;
 
 import com.reckue.ms.entity.Indicator;
-import com.reckue.ms.service.IndicatorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.reckue.ms.model.IndicatorDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -11,38 +11,26 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/indicator")
-public class IndicatorController {
-
-    @Autowired
-    private IndicatorService indicatorService;
+public interface IndicatorController {
 
     @PostMapping
-    Indicator add(@RequestBody Indicator indicator) {
-        return indicatorService.add(indicator);
-    }
+    ResponseEntity<IndicatorDto> createIndicator(@RequestBody IndicatorDto indicatorDto);
 
     @GetMapping("/{id}")
-    Indicator findById(@PathVariable UUID id) {
-        return indicatorService.findById(id);
-    }
+    IndicatorDto findIndicatorById(@PathVariable UUID id);
 
     @GetMapping
-    List<Indicator> find(@RequestParam long limit, @RequestParam long offset) {
-        return indicatorService.find(limit, offset);
-    }
+    List<Indicator> findIndicatorByFilter(@RequestParam long limit, @RequestParam long offset);
 
     @GetMapping("/filter")
-    List<Indicator> search(
+    List<Indicator> searchIndicatorByDate(
             @RequestParam long limit,
             @RequestParam long offset,
             @RequestParam LocalDateTime start,
             @RequestParam LocalDateTime end
-    ) {
-        return indicatorService.findAllByDate(limit, offset, start, end);
-    }
+    );
 
     @DeleteMapping("/{id}")
-    void deleteById(@PathVariable UUID id) {
-        indicatorService.deleteById(id);
-    }
+    ResponseEntity<Void> deleteIndicatorById(@PathVariable UUID id);
 }
+

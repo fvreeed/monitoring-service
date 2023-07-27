@@ -1,8 +1,8 @@
 package com.reckue.ms.controller;
 
 import com.reckue.ms.entity.Metric;
-import com.reckue.ms.service.MetricService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.reckue.ms.model.MetricDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,34 +10,21 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/metric")
-public class MetricController {
-
-    @Autowired
-    private MetricService metricService;
+public interface MetricController {
 
     @PostMapping
-    Metric create(@RequestBody Metric metric) {
-        return metricService.create(metric);
-    }
+    ResponseEntity<MetricDto> createMetric(@RequestBody MetricDto metricDto);
 
     @GetMapping("/{id}")
-    Metric findById(@PathVariable UUID id) {
-        return metricService.findById(id);
-    }
+    MetricDto findMetricById(@PathVariable UUID id);
 
     @GetMapping("/filter")
-    List<Metric> filteredSearch(@RequestParam int limit, @RequestParam int offset) {
-        return metricService.filteredSearch(limit, offset);
-    }
+    List<Metric> searchMetricByFilter(@RequestParam int limit, @RequestParam int offset);
 
     @PostMapping("/{id}")
-    Metric updateById(@RequestBody Metric metric, @PathVariable UUID id) {
-        metric.setId(id);
-        return metricService.updateById(metric);
-    }
+    MetricDto updateMetricById(@RequestBody MetricDto metricDto, @PathVariable UUID id);
 
     @DeleteMapping("/{id}")
-    void deleteById(@PathVariable UUID id) {
-        metricService.deleteById(id);
-    }
+    ResponseEntity<Void> deleteMetricById(@PathVariable UUID id);
 }
+
